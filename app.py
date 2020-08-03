@@ -4,10 +4,12 @@ import session_items as session
 app = Flask(__name__)
 app.config.from_object('flask_config.Config')
 
-@app.route('/Git/DevOps-Course-Starter')
+@app.route('/', methods=['GET', 'POST'])
 
 def index():
-    return render_template('/Git/DevOps-Course-Starter/templates/index.html')
+    return render_template('index.html')
+    get_items()
+    add_item(title)
     
 
 if __name__ == '__main__':
