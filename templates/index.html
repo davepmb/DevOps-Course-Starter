@@ -11,7 +11,24 @@
     <div class="col-md-12">
       <h2>Items</h2>
       <ul class="list-group mb-4">
-        <!-- List the todo items here -->
+          {% for todo in todos %}
+            {{todo.id}} - {{todo.title}}
+            <br>
+          {% endfor %}
+
+        <form action="/add-todo" method="post">
+            <div class="form-example">
+              <label for="name">Enter your todo name: </label>
+              <input type="text" name="name" id="name" required>
+            </div>
+            <div class="form-example">
+                <button class="btn btn-primary" type="submit">submit todo</button>
+            </div>
+        </form>
+        
+        Pick up Groceries
+        Run Errands
+        School Run
       </ul>
     </div>
   </div>
