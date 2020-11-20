@@ -4,6 +4,7 @@ import os
 import requests
 from todo_item import ToDoItem
 
+
 app = Flask(__name__)
 app.config.from_object('flask_config.Config')
 
@@ -18,8 +19,11 @@ def index():
 
     our_card_list = []
     for card in trello_card_list:
-        status = "Not Started" if card["idList"] == '5f51689cc895b228ffcd80e6' else "Completed"
-        our_card_list.append({ "name": card["name"], "id": card["id"], "status": status })
+        status = "Not Started" if card["idList"] == os.environ["THINGS_TO_DO"] else "Completed"
+        ouritem = ToDoItem(card["id"], status , card["name"])
+        our_card_list.append (ouritem)
+
+
        
         
     return render_template('index.html', items = our_card_list)
@@ -42,15 +46,6 @@ def completeitem():
         params={"key": os.environ["TRELLO_API_KEY"], "token": os.environ["TRELLO_API_TOKEN"], "idList": os.environ["DONE"]}
     )
     return redirect("/")
-
-# @app.route('/')
-# def index():
-#     items = session.get_items()
-#
-#     return render_template("index.html", todos = items)
-
-
-
 
 
 
